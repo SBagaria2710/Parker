@@ -1,0 +1,23 @@
+.parking-table-wrapper {
+    background: #fff;
+    margin: 10px 0 20px;
+    border: 2px solid #f1f1f1;
+    padding: 10px 20px;
+}
+
+@media (max-width: 1135px) and (min-width: 995px) {
+    min-width: 0.7rem;
+}
+
+@media (max-width: 991px) and (min-width: 890px) {
+    min-width: 0.85rem;
+}
+
+@media (max-width: 889px) and (min-width: 800px) {
+    min-width: 1rem;
+}
+
+@media (max-width: 799px) and (min-width: 769px) {
+    min-width: 1.1rem;
+}
+

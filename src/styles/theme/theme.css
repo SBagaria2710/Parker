@@ -1,0 +1,19 @@
+@import './variables.css';
+@import './font.css';
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	background: #f9f9f9f6;
+}
+
+.custom-card {
+	background: #fff;
+	margin: 5px 0 20px;
+	padding: 20px 30px;
+	border: 1px solid rgba(0,0,0,.125);
+	border-radius: 5px;
+	box-shadow: 0 0 20px rgba(43,45,56,.08);
+	-webkit-box-shadow: 0 0 20px rgba(43,45,56,.08);
+	-moz-box-shadow: 0 0 20px rgba(43,45,56,.08);
+}

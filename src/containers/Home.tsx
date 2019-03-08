@@ -56,7 +56,7 @@ class Home extends React.Component<IProps, IAppState> {
 
     handleIncomingCar = (event) => {
         const { name, value } = event.target;
-        let incomingCarDetail:ICarDetail = { ...this.state.incomingCarDetail, [name]: value };
+        let incomingCarDetail: ICarDetail = { ...this.state.incomingCarDetail, [name]: value };
         this.setState({ incomingCarDetail });
     }
 
@@ -68,110 +68,107 @@ class Home extends React.Component<IProps, IAppState> {
     }
 
     parkCar = (newCarDetail): boolean | void => {
-        let availableSlotId = findNearestSlot(this.state.slotData)
+        let tempSlotData = JSON.parse(JSON.stringify(this.state.slotData))
+        let availableSlotId = findNearestSlot(tempSlotData)
         if (availableSlotId) {
             // this.setState({
-            let tempSlotData: ISlot[] = [
-                ...this.state.slotData.slice(0, availableSlotId - 1),
-                Object.assign({}, this.state.slotData[availableSlotId - 1], {
-                    availability: false,
-                    id: availableSlotId,
-                    car: {
-                        RegistrationNumber: newCarDetail.RegistrationNumber,
-                        Color: newCarDetail.Color
-                    }
-                }),
-                ...this.state.slotData.slice(availableSlotId)
-            ]
+            tempSlotData[availableSlotId-1] = {
+                availability: false,
+                id: availableSlotId,
+                car: {
+                    RegistrationNumber: newCarDetail.RegistrationNumber,
+                    Color: newCarDetail.Color
+                }
+            }
             // });
             this.setState({ slotData: tempSlotData })
             return true;
+            }
+            return false;
+            // let slotData = this.state.slotData.map(slot => {
+            //     if(slot['id'] == availableSlotId) {
+            //         console.log('Here am I')
+            //         slot = {...slot, availability: false};
+            //         slot['car'] = {
+            //             ...slot['car'],
+            //             RegistrationNumber: newCarDetail.RegistrationNumber, 
+            //             Color: newCarDetail.Color
+            //         }
+            //     }
+            // })
         }
-        return false;
-        // let slotData = this.state.slotData.map(slot => {
-        //     if(slot['id'] == availableSlotId) {
-        //         console.log('Here am I')
-        //         slot = {...slot, availability: false};
-        //         slot['car'] = {
-        //             ...slot['car'],
-        //             RegistrationNumber: newCarDetail.RegistrationNumber, 
-        //             Color: newCarDetail.Color
-        //         }
-        //     }
-        // })
-    }
 
-    populateSlotData = ():void => {
-        console.log('here')
-        let randomCarDetails:ICarDetail[] = generateRandomCarDetails(this.state.M);
-        randomCarDetails.forEach((randomCarDetail) => {
-            if (this.parkCar(randomCarDetail)) console.log('Done');
-            else console.log('Slot Not Available');
-        })
-        console.log('now there')
-    }
+        populateSlotData = (): void => {
+            console.log('here')
+            let randomCarDetails: ICarDetail[] = generateRandomCarDetails(this.state.M);
+            randomCarDetails.forEach((randomCarDetail) => {
+                if (this.parkCar(randomCarDetail)) console.log('Done');
+                else console.log('Slot Not Available');
+            })
+            console.log('now there')
+        }
 
-    delSlot = ( id:number ) => {
-        console.log('Delete Car at SlotID: ', id)
-    }
+        delSlot = (id: number) => {
+            console.log('Delete Car at SlotID: ', id)
+        }
 
-    initializeMap = ():void => {
-        this.setState({ slotData: generateEmptySlots(this.state.N) },
-            () => this.populateSlotData()
-        );
-        calculateFloors(this.state.N);
-    }
+        initializeMap = (): void => {
+            this.setState({ slotData: generateEmptySlots(this.state.N) },
+                () => this.populateSlotData()
+            );
+            calculateFloors(this.state.N);
+        }
 
-    render() {
-        const { submittedInitialValues } = this.state
-        { submittedInitialValues && this.initializeMap }
-        return (
-            <div>
-                <Navigation />
-                <div className='container-fluid home-container'>
-                    {/* {submittedInitialValues ? <div className='alert alert-success'>You got it right!</div> : null } */}
-                    <div className='row' style={{ height: '100%' }}>
-                        <div className='form-container col-md-4 col-lg-3 col-12'>
-                            {!submittedInitialValues &&
-                                <InitialForm
-                                    N={this.state.N}
-                                    M={this.state.M}
-                                    handleChange={this.handleChange}
-                                    handleSubmit={this.handleSubmit}
-                                />
-                            }
-                            {submittedInitialValues &&
-                                <IncomingCarDetailForm
-                                    checkSlotAvailability={this.checkSlotAvailability}
-                                    handleIncomingCar={this.handleIncomingCar}
-                                    incomingCarDetail={this.state.incomingCarDetail}
-                                />
-                            }
-                        </div>
-                        <div className='col-md-8 col-lg-9 col-12'>
-                            {/* <ParkingTable 
+        render() {
+            const { submittedInitialValues } = this.state
+            { submittedInitialValues && this.initializeMap }
+            return (
+                <div>
+                    <Navigation />
+                    <div className='container-fluid home-container'>
+                        {/* {submittedInitialValues ? <div className='alert alert-success'>You got it right!</div> : null } */}
+                        <div className='row' style={{ height: '100%' }}>
+                            <div className='form-container col-md-4 col-lg-3 col-12'>
+                                {!submittedInitialValues &&
+                                    <InitialForm
+                                        N={this.state.N}
+                                        M={this.state.M}
+                                        handleChange={this.handleChange}
+                                        handleSubmit={this.handleSubmit}
+                                    />
+                                }
+                                {submittedInitialValues &&
+                                    <IncomingCarDetailForm
+                                        checkSlotAvailability={this.checkSlotAvailability}
+                                        handleIncomingCar={this.handleIncomingCar}
+                                        incomingCarDetail={this.state.incomingCarDetail}
+                                    />
+                                }
+                            </div>
+                            <div className='col-md-8 col-lg-9 col-12'>
+                                {/* <ParkingTable 
                                 slotData={this.state.slotData}
                                 delSlot={this.delSlot}
                             /> */}
-                            <ParkingSummary
-                                N={this.state.N}
-                                M={this.state.M}
-                                Level={this.state.Level}
-                                handleChange={this.handleChange}
-                            />
-                            <ParkingMap
-                                N={this.state.N}
-                                M={this.state.M}
-                                slotData={this.state.slotData}
-                                Level={this.state.Level}
-                                submittedInitialValues={this.state.submittedInitialValues}
-                            />
+                                <ParkingSummary
+                                    N={this.state.N}
+                                    M={this.state.M}
+                                    Level={this.state.Level}
+                                    handleChange={this.handleChange}
+                                />
+                                <ParkingMap
+                                    N={this.state.N}
+                                    M={this.state.M}
+                                    slotData={this.state.slotData}
+                                    Level={this.state.Level}
+                                    submittedInitialValues={this.state.submittedInitialValues}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
-}
 
-export default Home;
+    export default Home;

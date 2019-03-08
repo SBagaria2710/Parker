@@ -71,7 +71,6 @@ class Home extends React.Component<IProps, IAppState> {
         let tempSlotData = JSON.parse(JSON.stringify(this.state.slotData))
         let availableSlotId = findNearestSlot(tempSlotData)
         if (availableSlotId) {
-            // this.setState({
             tempSlotData[availableSlotId-1] = {
                 availability: false,
                 id: availableSlotId,
@@ -80,8 +79,25 @@ class Home extends React.Component<IProps, IAppState> {
                     Color: newCarDetail.Color
                 }
             }
-            // });
             this.setState({ slotData: tempSlotData })
+
+            //Another Try
+            // if(this.state.slotData.length) {
+            //     this.setState(prevState => {
+            //         const slotData:any = prevState.slotData.map((obj) => {
+            //             obj.id == availableSlotId ? ({
+            //                 ...obj,
+            //                 availability: !obj.availability,
+            //                 car: {
+            //                     ...obj.car,
+            //                     RegistrationNumber: newCarDetail.RegistrationNumber,
+            //                     Color: newCarDetail.Color
+            //                 }
+            //             }) : obj
+            //         })
+            //         return slotData;
+            //     })
+            // }
             return true;
             }
             return false;

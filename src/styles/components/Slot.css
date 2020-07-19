@@ -1,30 +1,30 @@
 .slot-container {
-    overflow: hidden;
-    border-radius: 2px;
-    margin: 10px;
-    padding: 10px;
-    cursor: pointer;
-    min-height: 111.78px
+  overflow: hidden;
+  border-radius: 2px;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  min-height: 111.78px;
 }
 
 .slot-detail-title {
-    margin-bottom: 0.1rem;
-    color: rgb(105, 101, 101);
-    font-size: 14px;
-    font-weight: 500;
+  margin-bottom: 0.1rem;
+  color: rgb(105, 101, 101);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .slot-detail {
-    color: black;
-    font-size: 15px;
-    font-weight: normal;
+  color: black;
+  font-size: 15px;
+  font-weight: normal;
 }
 
 .slot-detail-color {
-    margin-top: 4px;
-    width: 25%;
-    height: 15px;
-    border: 0.5px solid black;
-    text-align: center;
-    padding: 5px;
+  margin-top: 4px;
+  width: 25%;
+  height: 15px;
+  border: 0.5px solid black;
+  text-align: center;
+  padding: 5px;
 }

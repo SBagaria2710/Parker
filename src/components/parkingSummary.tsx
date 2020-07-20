@@ -13,8 +13,7 @@ export const ParkingSummary = (props) => {
       <p className="inline-heading">Parking Slots Available: {N - M}</p>
       <div className="form-inline">
         <label htmlFor="Level">
-          {" "}
-          Level:
+          &nbsp; Level:
           <select
             style={{ marginLeft: ".5rem" }}
             className="form-control"

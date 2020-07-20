@@ -8,7 +8,7 @@ import { ParkingMap } from "../components/ParkingMap";
 import { IncomingCarDetailForm } from "../components/IncomingCarDetail";
 import { ParkingTable } from "../components/ParkingTable";
 
-//Functions, Interfaces and Styles
+//Functions, Interfaces and Sty(les
 import {
   calculateFloors,
   generateEmptySlots,
@@ -54,7 +54,9 @@ class Home extends React.Component<IProps, IAppState> {
     const { N, M } = this.state;
     if (N >= M && N > 0 && M > 0) {
       this.initializeMap();
-      this.setState({ submittedInitialValues: true });
+      this.setState((prevState) => ({
+        submittedInitialValues: !prevState.submittedInitialValues,
+      }));
     } else {
       alert("Something's wrong with initial values");
       this.setState({ N: 0, M: 0 });
@@ -136,10 +138,11 @@ class Home extends React.Component<IProps, IAppState> {
   };
 
   initializeMap = (): void => {
-    this.setState({ slotData: generateEmptySlots(this.state.N) }, () =>
-      this.populateSlotData()
+    this.setState(
+      { slotData: generateEmptySlots(this.state.N, this.state.M) },
+      () => this.populateSlotData()
     );
-    calculateFloors(this.state.N);
+    console.log(calculateFloors(this.state.N));
   };
 
   render() {
@@ -151,22 +154,20 @@ class Home extends React.Component<IProps, IAppState> {
       <div>
         <Navigation />
         <div className="container-fluid home-container">
-          {/* {submittedInitialValues ? <div className='alert alert-success'>You got it right!</div> : null } */}
           <div className="row" style={{ height: "100%" }}>
             <div className="form-container col-md-4 col-lg-3 col-12">
-              {!submittedInitialValues && (
+              {submittedInitialValues ? (
+                <IncomingCarDetailForm
+                  checkSlotAvailability={this.checkSlotAvailability}
+                  handleIncomingCar={this.handleIncomingCar}
+                  incomingCarDetail={this.state.incomingCarDetail}
+                />
+              ) : (
                 <InitialForm
                   N={this.state.N}
                   M={this.state.M}
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
-                />
-              )}
-              {submittedInitialValues && (
-                <IncomingCarDetailForm
-                  checkSlotAvailability={this.checkSlotAvailability}
-                  handleIncomingCar={this.handleIncomingCar}
-                  incomingCarDetail={this.state.incomingCarDetail}
                 />
               )}
             </div>

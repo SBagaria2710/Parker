@@ -1,7 +1,7 @@
-import { ICarDetail } from './CarDetail'
+import { ICarDetail } from "./CarDetail";
 
 export interface ISlot {
-    availability: boolean,
-    id: number,
-    car: ICarDetail
+  availability: boolean;
+  id: number;
+  car?: ICarDetail;
 }

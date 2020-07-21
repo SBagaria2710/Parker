@@ -10,13 +10,15 @@ import { ICarDetail } from "../interfaces/CarDetail";
 import "../styles/components/ParkingMap.css";
 
 export const ParkingMap = (props) => {
-  let slots = props.slotData.map((slot) => <Slot data={slot} key={slot.id} />);
+  const { slotData } = props;
   return (
     <div className="floor-map-body">
       <div className="col-5 floor-entry-sign">Entry</div>
       {props.submittedInitialValues && (
         <div className="row" style={{ width: "100%", height: "auto" }}>
-          {slots}
+          {slotData.map((slot) => (
+            <Slot data={slot} key={slot.id} />
+          ))}
         </div>
       )}
     </div>

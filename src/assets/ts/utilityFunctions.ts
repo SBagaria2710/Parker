@@ -26,7 +26,7 @@ export const generateEmptySlots = (n: number, m: number = 0): ISlot[] => {
   return slotData;
 };
 
-export const calculateFloors = (n: number): Object => {
+export const calculateFloors = (n: number): number => {
   let totalFloors = Math.ceil(n / 12);
   return totalFloors;
 };
@@ -40,4 +40,12 @@ export const findNearestSlot = (slotData): number => {
   let availableSlots = slotData.filter(filterByAvailability);
   if (!availableSlots.length) return 0;
   return availableSlots[0].id;
+};
+
+export const times = function (n: number, iterator: any) {
+  var accum = Array(Math.max(0, n));
+  for (var i = 0; i < n; i++) {
+    accum[i] = iterator.call(i);
+  }
+  return accum;
 };

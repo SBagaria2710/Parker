@@ -25,7 +25,8 @@ class Home extends React.Component<IProps, IAppState> {
   constructor(props) {
     super(props);
     this.state = {
-      Level: "Ground",
+      activeLevel: "Ground",
+      availableFloors: 0,
       N: 0,
       M: 0,
       submittedInitialValues: false,
@@ -138,11 +139,14 @@ class Home extends React.Component<IProps, IAppState> {
   };
 
   initializeMap = (): void => {
+    const availableFloors = calculateFloors(this.state.N);
     this.setState(
-      { slotData: generateEmptySlots(this.state.N, this.state.M) },
+      {
+        slotData: generateEmptySlots(this.state.N, this.state.M),
+        availableFloors,
+      },
       () => this.populateSlotData()
     );
-    console.log(calculateFloors(this.state.N));
   };
 
   render() {
@@ -175,14 +179,15 @@ class Home extends React.Component<IProps, IAppState> {
               <ParkingSummary
                 N={this.state.N}
                 M={this.state.M}
-                Level={this.state.Level}
+                availableFloors={this.state.availableFloors}
+                activeLevel={this.state.activeLevel}
                 handleChange={this.handleChange}
               />
               <ParkingMap
                 N={this.state.N}
                 M={this.state.M}
                 slotData={this.state.slotData}
-                Level={this.state.Level}
+                activeLevel={this.state.activeLevel}
                 submittedInitialValues={this.state.submittedInitialValues}
               />
             </div>

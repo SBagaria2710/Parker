@@ -36,20 +36,24 @@ const randomCarColor = (): string => {
   return color;
 };
 
+export const generateRandomCarDetail = (): ICarDetail => {
+  return {
+    RegistrationNumber:
+      randomState() +
+      "-" +
+      randomCityCode() +
+      "-" +
+      randomletters() +
+      "-" +
+      randomCode(),
+    Color: randomCarColor(),
+  };
+};
+
 export const generateRandomCarDetails = (M: number): ICarDetail[] => {
   let randomCarDetails: ICarDetail[] = [];
   for (let i = 1; i <= M; i++) {
-    let regNumber: ICarDetail = {
-      RegistrationNumber:
-        randomState() +
-        "-" +
-        randomCityCode() +
-        "-" +
-        randomletters() +
-        "-" +
-        randomCode(),
-      Color: randomCarColor(),
-    };
+    let regNumber: ICarDetail = generateRandomCarDetail();
     randomCarDetails.push(regNumber);
   }
   return randomCarDetails;

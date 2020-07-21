@@ -1,4 +1,4 @@
 export interface ICarDetail {
-    RegistrationNumber: string,
-    Color: string
+  RegistrationNumber: string;
+  Color: string;
 }

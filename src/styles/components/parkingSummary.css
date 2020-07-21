@@ -1,10 +1,10 @@
 .inline-heading {
-    margin-top: 1rem !important;
+  margin-top: 1rem !important;
 }
 
 @media (max-width: 992px) and (min-width: 598px) {
-    .inline-heading {
-        margin-top: 1rem !important;
-        margin-right: 20px;
-    }
+  .inline-heading {
+    margin-top: 1rem !important;
+    margin-right: 20px;
+  }
 }

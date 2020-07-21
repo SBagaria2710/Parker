@@ -1,17 +1,17 @@
 .floor-map-body {
-    padding: 40px 20px;
-    background: #fff;
-    margin: 20px;
-    border: 1px solid #ddd;
-    display: flex;
-    position: relative;
+  padding: 40px 20px;
+  background: #fff;
+  margin: 20px;
+  border: 1px solid #ddd;
+  display: flex;
+  position: relative;
 }
 
 .floor-entry-sign {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    padding: 5px;
-    border: 1px solid black;
-    text-align: center;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  border: 1px solid black;
+  text-align: center;
 }

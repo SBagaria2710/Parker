@@ -26,7 +26,7 @@ export const Slot = (props: IProps) => {
           <p className="slot-detail-title">
             Registration Number:
             <br />
-            <span className="slot-detail">{car.RegistrationNumber}</span>
+            <span className="slot-detail">{car?.RegistrationNumber}</span>
           </p>
           <div style={{ display: "flex" }}>
             <p className="slot-detail-title" style={{ marginRight: "8px" }}>
@@ -34,7 +34,7 @@ export const Slot = (props: IProps) => {
             </p>
             <div
               className="mr-auto slot-detail-color"
-              style={{ backgroundColor: `${car.Color}` }}
+              style={{ backgroundColor: `${car?.Color}` }}
             ></div>
           </div>
           <p className="slot-detail-title">

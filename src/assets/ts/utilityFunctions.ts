@@ -8,17 +8,17 @@ export const generateEmptySlots = (n: number, m: number = 0): ISlot[] => {
     let slotObj: ISlot = {
       availability: true,
       id: i,
+      level: i % 12 === 0 ? Math.floor(i / 12) - 1 : Math.floor(i / 12),
       car: {
         RegistrationNumber: "",
         Color: "",
       },
     };
     if (j <= m) {
-      slotObj.car = initialFilledSlots[j - 1];
-    } else {
-      slotObj.car = {
-        RegistrationNumber: "",
-        Color: "",
+      slotObj = {
+        ...slotObj,
+        car: initialFilledSlots[j - 1],
+        availability: false,
       };
     }
     slotData.push(slotObj);

@@ -26,7 +26,7 @@ const Levels = (availableFloors: number) => {
     tempArr.push(a++);
   });
   return tempArr.map((val: number) => (
-    <option value={decideLevelName(val)}>{val}</option>
+    <option value={val}>{decideLevelName(val)}</option>
   ));
 };
 
@@ -47,8 +47,12 @@ export const ParkingSummary = (props) => {
       <p className="inline-heading">
         Level Chosen: {submittedInitialValues ? activeLevel : "N/A"}
       </p>
-      <p className="inline-heading">Total Parking Slots: {N}</p>
-      <p className="inline-heading">Parking Slots Available: {N - M}</p>
+      <p className="inline-heading">
+        Total Parking Slots: {submittedInitialValues ? N : "N/A"}
+      </p>
+      <p className="inline-heading">
+        Parking Slots Available: {submittedInitialValues ? N - M : "N/A"}
+      </p>
       <div className="form-inline">
         {submittedInitialValues ? (
           <label htmlFor="activeLevel">

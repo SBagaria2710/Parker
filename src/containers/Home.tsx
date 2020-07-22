@@ -14,7 +14,10 @@ import {
   generateEmptySlots,
   findNearestSlot,
 } from "../assets/ts/utilityFunctions";
-import { generateRandomCarDetails } from "../assets/ts/RegistrationNumberGenerator";
+import {
+  generateRandomCarDetails,
+  generateRandomCarDetail,
+} from "../assets/ts/RegistrationNumberGenerator";
 import { IAppState } from "../interfaces/GenericInterface";
 import { ISlot } from "../interfaces/Slot";
 import { ICarDetail } from "../interfaces/CarDetail";
@@ -25,7 +28,7 @@ class Home extends React.Component<IProps, IAppState> {
   constructor(props) {
     super(props);
     this.state = {
-      activeLevel: "Ground",
+      activeLevel: 0,
       availableFloors: 0,
       N: 0,
       M: 0,
@@ -40,7 +43,11 @@ class Home extends React.Component<IProps, IAppState> {
   }
 
   handleChange = (event: any): void => {
-    if (event.target.name === "M" || event.target.name === "N") {
+    if (
+      event.target.name === "M" ||
+      event.target.name === "N" ||
+      event.target.name === "activeLevel"
+    ) {
       this.setState({
         [event.target.name]: parseInt(event.target.value),
       } as any);
@@ -126,27 +133,16 @@ class Home extends React.Component<IProps, IAppState> {
     // })
   };
 
-  populateSlotData = (): void => {
-    let randomCarDetails: ICarDetail[] = generateRandomCarDetails(this.state.M);
-    randomCarDetails.forEach((randomCarDetail) => {
-      if (this.parkCar(randomCarDetail)) console.log("Done");
-      else console.log("Slot Not Available");
-    });
-  };
-
   delSlot = (id: number) => {
     console.log("Delete Car at SlotID: ", id);
   };
 
   initializeMap = (): void => {
     const availableFloors = calculateFloors(this.state.N);
-    this.setState(
-      {
-        slotData: generateEmptySlots(this.state.N, this.state.M),
-        availableFloors,
-      },
-      () => this.populateSlotData()
-    );
+    this.setState({
+      slotData: generateEmptySlots(this.state.N, this.state.M),
+      availableFloors,
+    });
   };
 
   render() {

@@ -10,15 +10,17 @@ import { ICarDetail } from "../interfaces/CarDetail";
 import "../styles/components/ParkingMap.css";
 
 export const ParkingMap = (props) => {
-  const { slotData } = props;
+  const { slotData, activeLevel } = props;
   return (
     <div className="floor-map-body">
       <div className="col-5 floor-entry-sign">Entry</div>
       {props.submittedInitialValues && (
         <div className="row" style={{ width: "100%", height: "auto" }}>
-          {slotData.map((slot) => (
-            <Slot data={slot} key={slot.id} />
-          ))}
+          {slotData
+            .filter((slot: ISlot) => slot.level === activeLevel)
+            .map((slot) => (
+              <Slot data={slot} key={slot.id} />
+            ))}
         </div>
       )}
     </div>

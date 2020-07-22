@@ -180,6 +180,7 @@ class Home extends React.Component<IProps, IAppState> {
                 N={this.state.N}
                 M={this.state.M}
                 availableFloors={this.state.availableFloors}
+                submittedInitialValues={this.state.submittedInitialValues}
                 activeLevel={this.state.activeLevel}
                 handleChange={this.handleChange}
               />

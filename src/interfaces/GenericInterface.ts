@@ -2,7 +2,7 @@ import { ICarDetail } from "./CarDetail";
 import { ISlot } from "./Slot";
 
 export interface IAppState {
-  activeLevel: string;
+  activeLevel: number;
   N: number;
   M: number;
   availableFloors: number;

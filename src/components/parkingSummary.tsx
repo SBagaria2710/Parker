@@ -31,28 +31,41 @@ const Levels = (availableFloors: number) => {
 };
 
 export const ParkingSummary = (props) => {
-  const { M, N, handleChange, activeLevel, availableFloors } = props;
+  const {
+    M,
+    N,
+    handleChange,
+    activeLevel,
+    availableFloors,
+    submittedInitialValues,
+  } = props;
   return (
     <div
       className="row container-fluid"
       style={{ justifyContent: "space-between", marginBottom: "15px" }}
     >
-      <p className="inline-heading">Level Chosen: {activeLevel}</p>
+      <p className="inline-heading">
+        Level Chosen: {submittedInitialValues ? activeLevel : "N/A"}
+      </p>
       <p className="inline-heading">Total Parking Slots: {N}</p>
       <p className="inline-heading">Parking Slots Available: {N - M}</p>
       <div className="form-inline">
-        <label htmlFor="activeLevel">
-          &nbsp; Level:
-          <select
-            style={{ marginLeft: ".5rem" }}
-            className="form-control"
-            value={activeLevel}
-            onChange={(e) => handleChange(e)}
-            name="activeLevel"
-          >
-            {Levels(availableFloors)}
-          </select>
-        </label>
+        {submittedInitialValues ? (
+          <label htmlFor="activeLevel">
+            &nbsp; Level:
+            <select
+              style={{ marginLeft: ".5rem" }}
+              className="form-control"
+              value={activeLevel}
+              onChange={(e) => handleChange(e)}
+              name="activeLevel"
+            >
+              {Levels(availableFloors)}
+            </select>
+          </label>
+        ) : (
+          <div />
+        )}
       </div>
     </div>
   );

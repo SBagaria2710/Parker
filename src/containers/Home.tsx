@@ -181,8 +181,6 @@ class Home extends React.Component<IProps, IAppState> {
                 handleChange={this.handleChange}
               />
               <ParkingMap
-                N={this.state.N}
-                M={this.state.M}
                 slotData={this.state.slotData}
                 activeLevel={this.state.activeLevel}
                 submittedInitialValues={this.state.submittedInitialValues}

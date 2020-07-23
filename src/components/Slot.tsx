@@ -1,16 +1,10 @@
 import React from "react";
 
+import { ISlot } from "../interfaces/Slot";
 import "../styles/components/Slot.css";
 
 interface IProps {
-  data: {
-    availability: boolean;
-    id: number;
-    car: {
-      RegistrationNumber: string;
-      Color: string;
-    };
-  };
+  data: ISlot;
   key: number;
 }
 

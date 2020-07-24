@@ -99,11 +99,6 @@ class Home extends React.Component<IProps, IAppState> {
     }
     const updatedSlotData = slotData.map((slot) => {
       if (slot.id === availableSlotId) {
-        console.log(slot, newCarDetail, {
-          ...slot,
-          ...newCarDetail,
-          availability: false,
-        });
         return { ...slot, availability: false, ...{ car: newCarDetail } };
       }
       return slot;

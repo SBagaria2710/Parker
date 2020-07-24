@@ -1,10 +1,11 @@
 import React from "react";
 
 export const IncomingCarDetailForm = (props) => {
+  const { checkSlotAvailability, handleIncomingCar, incomingCarDetail } = props;
   return (
     <div className="container-fluid">
       <div className="custom-card">
-        <form className="form-group" onSubmit={props.checkSlotAvailability}>
+        <form className="form-group" onSubmit={checkSlotAvailability}>
           <label htmlFor="Record registration number for incoming car">
             Registration Number:
             <input
@@ -12,18 +13,17 @@ export const IncomingCarDetailForm = (props) => {
               type="string"
               name="RegistrationNumber"
               placeholder="eg. KA-10-GI-2710"
-              onChange={props.handleIncomingCar}
+              onChange={handleIncomingCar}
             />
           </label>
           <div className="form-inline">
             <label htmlFor="Incoming Car Color">
-              {" "}
-              Color:
+              &nbsp; Color:
               <select
                 style={{ marginLeft: ".5rem" }}
                 className="form-control"
-                value={props.incomingCarDetail.Color}
-                onChange={props.handleIncomingCar}
+                value={incomingCarDetail.Color}
+                onChange={handleIncomingCar}
                 name="Color"
               >
                 <option value="Red">Red</option>

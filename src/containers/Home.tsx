@@ -1,4 +1,5 @@
 import React, { FormEvent } from "react";
+import isEmpty from "lodash/isEmpty";
 
 //Components and Containers
 import Navigation from "../components/Navbar";
@@ -82,55 +83,34 @@ class Home extends React.Component<IProps, IAppState> {
 
   checkSlotAvailability = (event) => {
     event.preventDefault();
-    if (this.parkCar(this.state.incomingCarDetail)) console.log("Done");
-    else console.log("Slot Not Available");
+    const { incomingCarDetail } = this.state;
+    if (incomingCarDetail.RegistrationNumber) {
+      if (this.parkCar(incomingCarDetail)) console.log("Done");
+      else console.log("Slot Not Available");
+    }
   };
 
   parkCar = (newCarDetail): boolean | void => {
-    let tempSlotData = JSON.parse(JSON.stringify(this.state.slotData));
-    let availableSlotId = findNearestSlot(tempSlotData);
-    if (availableSlotId) {
-      tempSlotData[availableSlotId - 1] = {
-        availability: false,
-        id: availableSlotId,
-        car: {
-          RegistrationNumber: newCarDetail.RegistrationNumber,
-          Color: newCarDetail.Color,
-        },
-      };
-      this.setState({ slotData: tempSlotData });
-
-      //Another Try
-      // if(this.state.slotData.length) {
-      //     this.setState(prevState => {
-      //         const slotData:any = prevState.slotData.map((obj) => {
-      //             obj.id == availableSlotId ? ({
-      //                 ...obj,
-      //                 availability: !obj.availability,
-      //                 car: {
-      //                     ...obj.car,
-      //                     RegistrationNumber: newCarDetail.RegistrationNumber,
-      //                     Color: newCarDetail.Color
-      //                 }
-      //             }) : obj
-      //         })
-      //         return slotData;
-      //     })
-      // }
-      return true;
+    const { slotData } = this.state;
+    let availableSlotId = -1;
+    const availableSlot = slotData.find((slot) => slot.availability);
+    if (availableSlot) {
+      availableSlotId = availableSlot.id;
     }
-    return false;
-    // let slotData = this.state.slotData.map(slot => {
-    //     if(slot['id'] == availableSlotId) {
-    //         console.log('Here am I')
-    //         slot = {...slot, availability: false};
-    //         slot['car'] = {
-    //             ...slot['car'],
-    //             RegistrationNumber: newCarDetail.RegistrationNumber,
-    //             Color: newCarDetail.Color
-    //         }
-    //     }
-    // })
+    const updatedSlotData = slotData.map((slot) => {
+      if (slot.id === availableSlotId) {
+        console.log(slot, newCarDetail, {
+          ...slot,
+          ...newCarDetail,
+          availability: false,
+        });
+        return { ...slot, availability: false, ...{ car: newCarDetail } };
+      }
+      return slot;
+    });
+    this.setState({
+      slotData: updatedSlotData,
+    });
   };
 
   delSlot = (id: number) => {

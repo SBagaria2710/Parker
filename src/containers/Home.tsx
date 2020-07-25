@@ -72,6 +72,12 @@ class Home extends React.Component<IProps, IAppState> {
     }
   };
 
+  handleRandomRegistration = (carDetail) => {
+    this.setState((prevState) => ({
+      incomingCarDetail: { ...prevState.incomingCarDetail, ...carDetail },
+    }));
+  };
+
   handleIncomingCar = (event: any) => {
     const { name, value } = event.target;
     let incomingCarDetail: ICarDetail = {
@@ -135,6 +141,7 @@ class Home extends React.Component<IProps, IAppState> {
                 <IncomingCarDetailForm
                   checkSlotAvailability={this.checkSlotAvailability}
                   handleIncomingCar={this.handleIncomingCar}
+                  handleRandomRegistration={this.handleRandomRegistration}
                   incomingCarDetail={this.state.incomingCarDetail}
                 />
               ) : (

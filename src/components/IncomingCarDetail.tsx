@@ -1,7 +1,13 @@
 import React from "react";
+import { generateRandomCarDetail } from "../assets/ts/RegistrationNumberGenerator";
 
 export const IncomingCarDetailForm = (props) => {
-  const { checkSlotAvailability, handleIncomingCar, incomingCarDetail } = props;
+  const {
+    checkSlotAvailability,
+    handleIncomingCar,
+    handleRandomRegistration,
+    incomingCarDetail,
+  } = props;
   return (
     <div className="container-fluid">
       <div className="custom-card">
@@ -36,6 +42,13 @@ export const IncomingCarDetailForm = (props) => {
           <br />
           <button className="btn btn-outline-dark" type="submit" value="Submit">
             Submit
+          </button>
+          <button
+            className="btn btn-default"
+            name="RegistrationNumber"
+            onClick={() => handleRandomRegistration(generateRandomCarDetail())}
+          >
+            Random
           </button>
         </form>
       </div>

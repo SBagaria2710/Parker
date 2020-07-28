@@ -90,6 +90,19 @@ class Home extends React.Component<IProps, IAppState> {
   checkSlotAvailability = (event) => {
     event.preventDefault();
     const { incomingCarDetail } = this.state;
+    const isTopFloor =
+      this.state.availableFloors - 1 === this.state.activeLevel;
+    if (!isTopFloor) {
+      const availableSlotIndex = this.state.slotData.findIndex(
+        (slot) => slot.availability === true
+      );
+      if (availableSlotIndex) {
+        if (this.state.slotData?.[availableSlotIndex]?.id % 12 === 0)
+          this.setState((prevState) => ({
+            activeLevel: prevState.activeLevel + 1,
+          }));
+      }
+    }
     if (incomingCarDetail.RegistrationNumber) {
       if (this.parkCar(incomingCarDetail)) console.log("Done");
       else console.log("Slot Not Available");

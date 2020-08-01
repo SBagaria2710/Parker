@@ -7,7 +7,6 @@ import { ParkingSummary } from "../components/parkingSummary";
 import { InitialForm } from "../components/initialForm";
 import { ParkingMap } from "../components/ParkingMap";
 import { IncomingCarDetailForm } from "../components/IncomingCarDetail";
-import { ParkingTable } from "../components/ParkingTable";
 
 //Functions, Interfaces and Sty(les
 import {

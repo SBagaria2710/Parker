@@ -44,8 +44,12 @@ module.exports = {
       },
       //CSS
       {
-        test: /\.css$/,
-        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+        test: /\.(css|sass)$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "sass-loader" },
+        ],
       },
       //Images
       {

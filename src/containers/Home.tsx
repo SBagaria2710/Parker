@@ -149,7 +149,7 @@ class Home extends React.Component<IProps, IAppState> {
         <div className="container-fluid home-container">
           <div className="row" style={{ height: "100%" }}>
             <div className="form-container col-md-4 col-lg-3 col-12">
-              {submittedInitialValues ? (
+              {!submittedInitialValues ? (
                 <IncomingCarDetailForm
                   checkSlotAvailability={this.checkSlotAvailability}
                   handleIncomingCar={this.handleIncomingCar}

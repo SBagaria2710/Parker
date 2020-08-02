@@ -11,6 +11,15 @@ export const IncomingCarDetailForm = (props) => {
   return (
     <div className="container-fluid">
       <div className="custom-card">
+        <h5
+          style={{
+            marginBottom: "20px",
+            textDecoration: "underline",
+            textAlign: "center",
+          }}
+        >
+          Manual Parking
+        </h5>
         <form className="form-group" onSubmit={checkSlotAvailability}>
           <label htmlFor="Record registration number for incoming car">
             Registration Number:
@@ -40,18 +49,26 @@ export const IncomingCarDetailForm = (props) => {
             </label>
           </div>
           <br />
-          <button className="btn btn-outline-dark" type="submit" value="Submit">
-            Submit
-          </button>
           <button
-            className="btn btn-default"
-            name="RegistrationNumber"
-            onClick={() => handleRandomRegistration(generateRandomCarDetail())}
+            className="btn btn-outline-dark"
+            style={{ width: "100%" }}
+            type="submit"
+            value="Submit"
           >
-            Random
+            Submit
           </button>
         </form>
       </div>
+      <form className="form-group" onSubmit={checkSlotAvailability}>
+        <button
+          style={{ width: "100%" }}
+          className="btn btn-outline-dark"
+          name="RegistrationNumber"
+          onClick={() => handleRandomRegistration(generateRandomCarDetail())}
+        >
+          + Park random car
+        </button>
+      </form>
     </div>
   );
 };
